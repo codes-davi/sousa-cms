@@ -1,0 +1,22 @@
+{
+  "name": "sousa-cms",
+  "version": "1.0.0",
+  "description": "Content management system (CMS) built in NodeJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "CMS"
+  ],
+  "author": "Davi Sousa",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "chalk": "^4.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.2",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.12.1"
+  }
+}
