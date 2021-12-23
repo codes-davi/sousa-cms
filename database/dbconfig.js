@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const connection = new Sequelize('nodinopress', 'root', '', {
+const connection = new Sequelize('sousa_cms', 'root', '', {
     host: 'localhost',
     dialect: 'mysql'
 });

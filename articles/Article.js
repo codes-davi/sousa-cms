@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const connection = require('../database/dbconfig');
+const Category = require('../categories/Category');
 const chalk = require('chalk');
 
 const Article = connection.define('articles', {
@@ -17,10 +18,14 @@ const Article = connection.define('articles', {
     }
 });
 
-Article.sync({force: false}).then(()=>{
+Category.hasMany(Article);
+Article.belongsTo(Category);
+
+//Synced Already
+/*Article.sync({force: false}).then(()=>{
     console.log(chalk.green('Table articles created successfully'));
 }).catch(err=>{
     console.log(chalk.red(err));
-})
+})*/
 
 module.exports = Article;
