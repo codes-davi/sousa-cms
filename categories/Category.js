@@ -13,10 +13,11 @@ const Category = connection.define('categories',{
     }
 });
 
-Category.sync({force: false}).then(()=>{
+//Synced already
+/*Category.sync({force: false}).then(()=>{
     console.log(chalk.green("Table categories created successfully"));
 }).then(err=>{
     console.log(chalk.red(err));
-})
+})*/
 
 module.exports = Category;

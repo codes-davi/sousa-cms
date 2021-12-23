@@ -4,6 +4,8 @@ const chalk = require('chalk');
 const connection = require('./database/dbconfig');
 const categoriesController = require('./categories/CategoriesController');
 const articleController = require('./articles/ArticlesController');
+const Category = require('./categories/Category');
+const Article = require('./articles/Article');
 const app = express();
 
 //setting view engine, bodyparser and static files location
