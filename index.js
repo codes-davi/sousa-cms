@@ -22,7 +22,7 @@ connection.authenticate().then(()=>{
 });
 
 //ROUTES
-app.use('/category', categoriesController);
+app.use(categoriesController);
 app.use('/article', articleController);
 
 app.get('/', (req,res)=>{

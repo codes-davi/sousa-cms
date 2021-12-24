@@ -20,7 +20,7 @@
                     <h2>Register a new category</h2>
                 </div>
                 <div class="card-body">
-                    <form action="/category/admin/categories/save" method="post">
+                    <form action="/admin/categories/save" method="post">
                         <input type="text" name="title" class="form-control" placeholder="Type the new category title">
                         <hr>
                         <button class="btn btn-success form-control">Submit</button>
@@ -53,7 +53,8 @@
                                 <th>
                                     <button class="btn btn-warning">Edit</button>
 
-                                    <form action="/category/admin/categories/delete" method="post" style="display: inline;">
+                                    <form action="/admin/categories/delete" method="post" style="display: inline;"
+                                        onsubmit="confirmDelete(event)">
                                         <input type="hidden" name="id" value="<%= category.id %>">
                                         <button class="btn btn-danger">Delete</button>
                                     </form>
@@ -64,6 +65,7 @@
                 </table>
             </div>
         </div>
+        <script src="../../helpers/utils.js"></script>
         <%- include('../partials/footer.ejs')%>
 </body>
 

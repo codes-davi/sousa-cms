@@ -22,7 +22,7 @@ router.post('/admin/categories/save', (req,res)=>{
             title: title,
             slug: slugify(title)
         }).then(()=>{
-            res.redirect('/category/admin/categories/new')
+            res.redirect('/admin/categories/new')
         }).catch(err=>{
             console.log(chalk.red(err));
         });
@@ -39,7 +39,7 @@ router.post('/admin/categories/delete', (req,res)=>{
                 id:id
             }
         }).then(()=>{
-            res.redirect('/category//admin/categories/new');
+            res.redirect('/admin/categories/new');
         }).catch(err=>{
             console.log(chalk.red(err));
         });
