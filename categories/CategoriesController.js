@@ -5,7 +5,14 @@ const Category = require('./Category');
 const router = express.Router();
 
 router.get('/admin/categories/new', (req,res)=>{
-    res.render('categories/newcategory.ejs');
+ 
+    Category.findAll({raw:true, order: [['id', 'DESC']]}).then(categories=>{
+        res.render('categories/newcategory.ejs', {
+            categories: categories
+        });
+    }).catch(err=>{
+        console.log(chalk.red(err));
+    });
 });
 
 router.post('/admin/categories/save', (req,res)=>{
@@ -21,6 +28,21 @@ router.post('/admin/categories/save', (req,res)=>{
         });
     }else{
         res.redirect('/admin/categories/new');
+    }
+});
+
+router.post('/admin/categories/delete', (req,res)=>{
+    let id = req.body.id;
+    if (id != undefined && !isNaN(id)) {
+        Category.destroy({
+            where:{
+                id:id
+            }
+        }).then(()=>{
+            res.redirect('/category//admin/categories/new');
+        }).catch(err=>{
+            console.log(chalk.red(err));
+        });
     }
 });
 
