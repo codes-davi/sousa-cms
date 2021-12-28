@@ -46,4 +46,21 @@ router.post('/admin/categories/delete', (req,res)=>{
     }
 });
 
+router.post('/admin/categories/update/:id', (req,res)=>{
+    let id = req.params.id;
+    let title = req.body.title;
+    Category.update({
+        title: title,
+        slug: slugify(title)
+    }, {
+        where: {
+            id: id
+        }
+    }).then(()=>{
+        res.redirect('/admin/categories/new');
+    }).catch(err=>{
+        console.log(chalk.red(err));
+    });
+});
+
 module.exports = router;

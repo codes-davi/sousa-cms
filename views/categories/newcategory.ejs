@@ -44,14 +44,24 @@
                                 <th>
                                     <%= category.id%>
                                 </th>
+                                <div id="editable-category-<%= category.id %>">
+                                    <th>
+                                        <div id="static-edit-<%= category.id %>">
+                                            <%= category.title%>
+                                        </div>
+                                        <form action="/admin/categories/update/<%= category.id %>" method="post"
+                                            id="edit-category-<%= category.id %>" class="d-none">
+                                            <input type="text" name="title" value="<%= category.title%>">
+                                        </form>
+                                    </th>
+                                    <th>
+                                        <%= category.slug%>
+                                    </th>
+                                </div>
                                 <th>
-                                    <%= category.title%>
-                                </th>
-                                <th>
-                                    <%= category.slug%>
-                                </th>
-                                <th>
-                                    <button class="btn btn-warning">Edit</button>
+                                    <button class="btn btn-warning" onclick="createEditionForm(this)" id="edit-btn-<%= category.id %>">Edit</button>
+
+                                    <button type="submit" id="save-btn-<%= category.id %>" class="d-none btn btn-success" onclick="saveBtnAction(this)">Save</button>
 
                                     <form action="/admin/categories/delete" method="post" style="display: inline;"
                                         onsubmit="confirmDelete(event)">
@@ -60,7 +70,7 @@
                                     </form>
                                 </th>
                             </tr>
-                        <%})%>
+                            <%})%>
                     </tbody>
                 </table>
             </div>
