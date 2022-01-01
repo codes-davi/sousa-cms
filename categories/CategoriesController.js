@@ -43,6 +43,8 @@ router.post('/admin/categories/delete', (req,res)=>{
         }).catch(err=>{
             console.log(chalk.red(err));
         });
+    }else{
+        res.redirect('/admin/categories/new');
     }
 });
 

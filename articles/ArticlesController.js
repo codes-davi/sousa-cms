@@ -11,11 +11,26 @@ router.get('/articles', (req,res)=>{
 });
 
 router.get('/admin/articles/new', (req,res)=>{
-    Category.findAll().then(categories=>{
-        res.render('articles/newarticle', {
-            categories: categories
-        });
-    })
+    
+    Article.findAll({
+        include: [{
+            model: Category
+        }]
+    }).then(articles=>{
+        Category.findAll().then(categories=>{
+            res.render('articles/newarticle', {
+                categories: categories,
+                articles: articles
+            });
+        }).catch(err=>{
+            console.log(chalk.red(err));
+            res.render('articles/newarticle', {
+                articles: articles
+            });
+        })
+    }).catch(err=>{
+        console.log(chalk.red(err));
+    });
 });
 
 router.post('/admin/articles/save', (req,res)=>{
@@ -33,6 +48,24 @@ router.post('/admin/articles/save', (req,res)=>{
     }).catch(err=>{
         console.log(chalk.red(err));
     });
+});
+
+router.post('/admin/articles/delete', (req,res)=>{
+    let id = req.body.id;
+
+    if (id != undefined && !isNaN(id)) {
+        Article.destroy({
+            where: {
+                id: id
+            }
+        }).then(()=>{
+            res.redirect('/articles/admin/new')
+        }).catch(err=>{
+            console.log(chalk.red(err));
+        });
+    }else{
+        res.redirect('/admin/articles/new')
+    }
 });
 
 module.exports = router;
