@@ -56,7 +56,17 @@
                             <td><%=article.title%></td>
                             <td><%=article.slug%></td>
                             <td><%=article.category.title%></td>
-                            <td>Não sei</td>
+                            <td>
+                                <a href="/admin/articles/new" class="btn btn-warning">Edit</a>
+
+                                <button type="submit" id="save-btn-<%= article.id %>" class="d-none btn btn-success" onclick="saveBtnAction(this)">Save</button>
+
+                                <form action="/admin/articles/delete" method="post" style="display: inline;"
+                                    onsubmit="confirmDelete(event)">
+                                    <input type="hidden" name="id" value="<%= article.id %>">
+                                    <button class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
                         </tr>
                         <%})%>
                     </tbody>

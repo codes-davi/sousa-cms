@@ -59,7 +59,7 @@ router.post('/admin/articles/delete', (req,res)=>{
                 id: id
             }
         }).then(()=>{
-            res.redirect('/articles/admin/new')
+            res.redirect('/admin/articles/new')
         }).catch(err=>{
             console.log(chalk.red(err));
         });
