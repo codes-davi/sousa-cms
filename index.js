@@ -23,7 +23,7 @@ connection.authenticate().then(()=>{
 
 //ROUTES
 app.use(categoriesController);
-app.use('/article', articleController);
+app.use(articleController);
 
 app.get('/', (req,res)=>{
     res.render('index');
