@@ -12,9 +12,36 @@
 </head>
 
 <body>
+    <%- include('partials/default-nav.ejs')%>
 
-    <!-- bootstrap scripts -->
-    <%- include('partials/footer.ejs')%>
+    <div class="container">
+        <br>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4 text-center">Welcome</h1>
+                <p class="lead text-center">Welcome to our blog, choose an article to read.</p>
+            </div>
+        </div>
+        <br>
+        <% articles.forEach(article=>{%>
+            <div class="card">
+                <div class="card-header">
+                    <h2>
+                        <%=article.title%>
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <p><%-article.body.substring(0,26)%></p>
+                    <hr>
+                    <a href="#">Read full Article</a>
+                </div>
+            </div>
+            <br>
+        <%})%>
+    </div>
+
+        <!-- bootstrap scripts -->
+        <%- include('partials/footer.ejs')%>
 </body>
 
 </html>

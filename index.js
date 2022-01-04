@@ -26,7 +26,15 @@ app.use(categoriesController);
 app.use(articleController);
 
 app.get('/', (req,res)=>{
-    res.render('index');
+    Article.findAll({
+        order: [['id', 'DESC']]
+    }).then(articles=>{
+        res.render('index', {
+            articles: articles
+        });
+    }).catch(err=>{
+        console.log(chalk.red(err));
+    });
 });
 
 app.listen(3000, ()=>{
