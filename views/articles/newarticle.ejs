@@ -57,7 +57,7 @@
                             <td><%=article.slug%></td>
                             <td><%=article.category.title%></td>
                             <td>
-                                <a href="/admin/articles/new" class="btn btn-warning">Edit</a>
+                                <a href="/admin/articles/edit/<%=article.id%>" class="btn btn-warning">Edit</a>
 
                                 <button type="submit" id="save-btn-<%= article.id %>" class="d-none btn btn-success" onclick="saveBtnAction(this)">Save</button>
 

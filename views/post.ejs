@@ -10,36 +10,23 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
-
 <body>
     <%- include('partials/default-nav.ejs')%>
 
     <div class="container">
         <br>
-        <div class="jumbotron jumbotron-fluid">
-            <div class="container">
-                <h1 class="display-4 text-center">Welcome</h1>
-                <p class="lead text-center">Welcome to our blog, choose an article to read.</p>
-            </div>
-        </div>
-        <br>
-        <% articles.forEach(article=>{%>
             <div class="card">
-                <div class="card-header">
+                <div class="card-header text-center">
                     <h2>
                         <%=article.title%>
                     </h2>
                 </div>
                 <div class="card-body">
                     <p><%-article.body%></p>
-                    <hr>
-                    <a href="/posts/<%=article.slug%>">Read full Article</a>
                 </div>
             </div>
             <br>
-        <%})%>
     </div>
-
         <!-- bootstrap scripts -->
         <%- include('partials/footer.ejs')%>
 </body>

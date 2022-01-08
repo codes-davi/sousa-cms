@@ -68,4 +68,23 @@ router.post('/admin/articles/delete', (req,res)=>{
     }
 });
 
+router.get('/admin/articles/edit/:id', (req,res)=>{
+    let id = req.params.id;
+    
+    if (id != undefined) {
+        Article.findByPk(id).then(article=>{
+            Category.findAll().then(categories=>{
+                res.render('articles/editarticle', {
+                    article: article,
+                    categories: categories
+                });
+            })
+        }).catch(err=>{
+            console.log(chalk.red(err));
+        });
+    } else {
+        res.redirect('/admin/articles/new');
+    }
+});
+
 module.exports = router;

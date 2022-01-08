@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOUSA-CMS</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/helpers/main.css">
+</head>
+
+<body>
+    <%- include('../partials/navbar.ejs')%>
+
+        <div class="container">
+            <hr>
+            <div class="card">
+                <div class="card-header">
+                    <h2>Edit Article</h2>
+                </div>
+                <div class="card-body">
+                    <form action="/admin/articles/save" method="post">
+                        <input type="text" name="title" class="form-control" placeholder="Type the new article title" value="<%= article.title %>">
+                        <hr>
+                        <textarea name="body" id="article" cols="30" rows="10" class="form-control">
+                        </textarea>
+                        <br>
+                        <select name="category" class="form-control">
+                            <% categories.forEach(cat=>{%>
+
+                                <%if(cat.id == article.categoryId){%>
+                                    <option value="<%= cat.id %>" selected><%= cat.title%></option>
+                                <%}else{%>
+                                    <option value="<%= cat.id %>"><%= cat.title%></option>
+                                <%}%>                 
+                            <%})%>
+                        </select>
+                        <br>
+                        <button class="btn btn-success form-control">Update</button>
+                    </form>
+                </div>
+            </div>
+            <br>
+        </div>
+
+        <div id="content" style="display: none;">
+            <%= article.body %>
+        </div>
+
+        <script src="/helpers/utils.js"></script>
+        <%- include('../partials/footer.ejs')%>
+        <script src="/tinymce/tinymce.min.js"></script>
+        <script>
+            tinymce.init({
+                selector: "#article",
+                plugins: [
+                    'advlist autolink link image lists print preview hr searchreplace wordcount fullscreen insertdatetime media save table paste emoticons'
+                ],
+                init_instance_callback: () =>{
+                    tinymce.get('article').setContent(document.querySelector('#content').textContent)
+                }
+            });
+        </script>
+</body>
+
+</html>

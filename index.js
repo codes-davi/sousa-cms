@@ -37,6 +37,27 @@ app.get('/', (req,res)=>{
     });
 });
 
+app.get('/posts/:slug', (req,res)=>{
+    
+    let slug = req.params.slug;
+    
+    if(slug) {
+        Article.findOne({
+            where:{
+                slug: slug
+            }
+        }).then(article=>{
+            res.render('post',{
+                article: article
+            })
+        }).catch(err=>{
+            console.log(chalk.red(err));
+        });
+    } else {
+        res.redirect('/');
+    }
+});
+
 app.listen(3000, ()=>{
     console.log(chalk.green('RUNNING'));
 });
