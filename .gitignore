@@ -105,4 +105,4 @@ dist
 .tern-port
 
 # TinyMCE
-public/TinyMCE
+# public/TinyMCE
