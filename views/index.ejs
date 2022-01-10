@@ -9,6 +9,7 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/helpers/main.css">
 </head>
 
 <body>
@@ -23,7 +24,7 @@
             </div>
         </div>
         <br>
-        <% articles.forEach(article=>{%>
+        <% articles.rows.forEach(article=>{%>
             <div class="card">
                 <div class="card-header">
                     <h2>
@@ -38,10 +39,10 @@
             </div>
             <br>
         <%})%>
+        <%- include('partials/pagination.ejs')%>
     </div>
-
-        <!-- bootstrap scripts -->
-        <%- include('partials/footer.ejs')%>
+    <!-- bootstrap scripts -->
+    <%- include('partials/footer.ejs')%>
 </body>
 
 </html>

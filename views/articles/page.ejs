@@ -9,27 +9,33 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="../helpers/main.css">
+    <link rel="stylesheet" href="/helpers/main.css">
 </head>
+
 <body>
-    <%- include('partials/default-nav.ejs')%>
+    <%- include('../partials/default-nav.ejs')%>
 
     <div class="container">
         <br>
+        <% articles.rows.forEach(article=>{%>
             <div class="card">
-                <div class="card-header text-center">
+                <div class="card-header">
                     <h2>
                         <%=article.title%>
                     </h2>
                 </div>
                 <div class="card-body">
                     <p><%-article.body%></p>
+                    <hr>
+                    <a href="/posts/<%=article.slug%>">Read full Article</a>
                 </div>
             </div>
             <br>
+        <%})%>
+        <%- include('../partials/pagination.ejs')%>
     </div>
         <!-- bootstrap scripts -->
-        <%- include('partials/footer.ejs')%>
+        <%- include('../partials/footer.ejs')%>
 </body>
 
 </html>

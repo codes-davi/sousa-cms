@@ -26,12 +26,20 @@ app.use(categoriesController);
 app.use(articleController);
 
 app.get('/', (req,res)=>{
-    Article.findAll({
-        order: [['id', 'DESC']]
+    Article.findAndCountAll({
+        order: [['id', 'DESC']],
+        limit: 4,
     }).then(articles=>{
-        res.render('index', {
-            articles: articles
-        });
+        Category.findAll().then(categories=>{
+            res.render('index', {
+                articles: articles,
+                categories: categories,
+                page: 1,
+                hasNext: true
+            });
+        }).catch(err=>{
+            console.log(chalk.red(err));
+        })
     }).catch(err=>{
         console.log(chalk.red(err));
     });
@@ -47,8 +55,16 @@ app.get('/posts/:slug', (req,res)=>{
                 slug: slug
             }
         }).then(article=>{
-            res.render('post',{
-                article: article
+            Category.findAll({
+                order: [['id', 'DESC']]
+            }).then(categories=>{
+                res.render('post',{
+                    article: article,
+                    categories: categories
+                })
+            }).catch(err=>{
+                console.log(chalk.red(err));
+                res.redirect('/');
             })
         }).catch(err=>{
             console.log(chalk.red(err));

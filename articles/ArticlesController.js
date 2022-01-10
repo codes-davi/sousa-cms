@@ -87,4 +87,39 @@ router.get('/admin/articles/edit/:id', (req,res)=>{
     }
 });
 
+router.get('/articles/page/:num', (req,res)=>{
+    let page = parseInt(req.params.num);
+    let offset;
+    let next;
+
+    if (isNaN(page) || page == 1) {
+        offset = 0;
+    } else {
+        offset = page * 4;
+    }
+
+    Article.findAndCountAll({
+        limit:4,
+        offset: offset
+    }).then(articles=>{
+        if (offset + 4 >= articles.count ) {
+            next = false;
+        } else {
+            next = true
+        }
+        Category.findAll({
+            order:[['id', 'DESC']]
+        }).then(categories=>{
+            res.render('articles/page', {
+                articles: articles,
+                categories: categories,
+                page: page,
+                hasNext:next
+            });
+        }).catch(err=>{
+            console.log(chalk.red(err));
+        });
+    });
+});
+
 module.exports = router;
