@@ -26,16 +26,24 @@ app.use(categoriesController);
 app.use(articleController);
 
 app.get('/', (req,res)=>{
+    let next;
     Article.findAndCountAll({
         order: [['id', 'DESC']],
         limit: 4,
     }).then(articles=>{
+
+        if (4 >= articles.count ) {
+            next = false;
+        } else {
+            next = true
+        }
+
         Category.findAll().then(categories=>{
             res.render('index', {
                 articles: articles,
                 categories: categories,
                 page: 1,
-                hasNext: true
+                hasNext: next
             });
         }).catch(err=>{
             console.log(chalk.red(err));

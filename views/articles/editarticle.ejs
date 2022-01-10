@@ -21,7 +21,7 @@
                     <h2>Edit Article</h2>
                 </div>
                 <div class="card-body">
-                    <form action="/admin/articles/save" method="post">
+                    <form action="/admin/articles/update/<%= article.id %>" method="post">
                         <input type="text" name="title" class="form-control" placeholder="Type the new article title" value="<%= article.title %>">
                         <hr>
                         <textarea name="body" id="article" cols="30" rows="10" class="form-control">
