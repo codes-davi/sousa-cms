@@ -6,10 +6,6 @@ const router = express.Router();
 const Category = require('../categories/Category');
 const Article = require('./Article');
 
-router.get('/articles', (req,res)=>{
-    res.send("test");
-});
-
 router.get('/admin/articles/new', (req,res)=>{
     
     Article.findAll({
