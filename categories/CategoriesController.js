@@ -3,8 +3,9 @@ const express = require('express');
 const slugify = require('slugify');
 const Category = require('./Category');
 const router = express.Router();
+const adminAuth  = require('../handlers/admin-handler');
 
-router.get('/admin/categories/new', (req,res)=>{
+router.get('/admin/categories/new', adminAuth, (req,res)=>{
  
     Category.findAll({raw:true, order: [['id', 'DESC']]}).then(categories=>{
         res.render('categories/newcategory.ejs', {
@@ -15,7 +16,7 @@ router.get('/admin/categories/new', (req,res)=>{
     });
 });
 
-router.post('/admin/categories/save', (req,res)=>{
+router.post('/admin/categories/save', adminAuth, (req,res)=>{
     let title = req.body.title;
     if(title != undefined){
         Category.create({
@@ -31,7 +32,7 @@ router.post('/admin/categories/save', (req,res)=>{
     }
 });
 
-router.post('/admin/categories/delete', (req,res)=>{
+router.post('/admin/categories/delete', adminAuth,  (req,res)=>{
     let id = req.body.id;
     if (id != undefined && !isNaN(id)) {
         Category.destroy({
@@ -48,7 +49,7 @@ router.post('/admin/categories/delete', (req,res)=>{
     }
 });
 
-router.post('/admin/categories/update/:id', (req,res)=>{
+router.post('/admin/categories/update/:id', adminAuth, (req,res)=>{
     let id = req.params.id;
     let title = req.body.title;
     Category.update({

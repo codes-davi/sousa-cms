@@ -5,8 +5,9 @@ const { default: slugify } = require('slugify');
 const router = express.Router();
 const Category = require('../categories/Category');
 const Article = require('./Article');
+const adminAuth = require('../handlers/admin-handler');
 
-router.get('/admin/articles/new', (req,res)=>{
+router.get('/admin/articles/new', adminAuth, (req,res)=>{
     
     Article.findAll({
         include: [{
@@ -29,7 +30,7 @@ router.get('/admin/articles/new', (req,res)=>{
     });
 });
 
-router.post('/admin/articles/save', (req,res)=>{
+router.post('/admin/articles/save', adminAuth, (req,res)=>{
     let title = req.body.title;
     let article = req.body.body;
     let catId = req.body.category;
@@ -46,7 +47,7 @@ router.post('/admin/articles/save', (req,res)=>{
     });
 });
 
-router.post('/admin/articles/delete', (req,res)=>{
+router.post('/admin/articles/delete', adminAuth, (req,res)=>{
     let id = req.body.id;
 
     if (id != undefined && !isNaN(id)) {
@@ -64,7 +65,7 @@ router.post('/admin/articles/delete', (req,res)=>{
     }
 });
 
-router.get('/admin/articles/edit/:id', (req,res)=>{
+router.get('/admin/articles/edit/:id', adminAuth, (req,res)=>{
     let id = req.params.id;
     
     if (id != undefined) {
@@ -83,7 +84,7 @@ router.get('/admin/articles/edit/:id', (req,res)=>{
     }
 });
 
-router.post('/admin/articles/update/:id', (req, res) => {
+router.post('/admin/articles/update/:id', adminAuth, (req, res) => {
     let id = req.params.id;
     let title = req.body.title;
     let body = req.body.title;
@@ -104,7 +105,7 @@ router.post('/admin/articles/update/:id', (req, res) => {
         });
 });
 
-router.get('/articles/page/:num', (req,res)=>{
+router.get('/articles/page/:num', adminAuth, (req,res)=>{
     let page = parseInt(req.params.num);
     let offset;
     let next;
