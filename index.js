@@ -1,9 +1,11 @@
 const express = require('express');
+const session = require('express-session');
 const bodyParser = require('body-parser');
 const chalk = require('chalk');
 const connection = require('./database/dbconfig');
 const categoriesController = require('./categories/CategoriesController');
 const articleController = require('./articles/ArticlesController');
+const userController = require('./users/UsersController');
 const Category = require('./categories/Category');
 const Article = require('./articles/Article');
 const app = express();
@@ -15,6 +17,13 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 //end
 
+//express-session
+app.use(session({
+    secret: 'ds7&&Ds8',
+    cookie: {maxAge: 86400000}
+}));
+
+//database auth
 connection.authenticate().then(()=>{
     console.log(chalk.blue('Authenticated'));
 }).catch(err=>{
@@ -24,6 +33,7 @@ connection.authenticate().then(()=>{
 //ROUTES
 app.use(categoriesController);
 app.use(articleController);
+app.use(userController);
 
 app.get('/', (req,res)=>{
     let next;
@@ -43,7 +53,8 @@ app.get('/', (req,res)=>{
                 articles: articles,
                 categories: categories,
                 page: 1,
-                hasNext: next
+                hasNext: next,
+                showCategory: true
             });
         }).catch(err=>{
             console.log(chalk.red(err));
