@@ -8,7 +8,6 @@ Main frameworks/technologies and libs used in this project:
 ![image](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
 ![image](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)
 ![image](https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white)
-![image](https://lh6.googleusercontent.com/GxWeTGpOUbuEE9xlMT5pVDzZSAFRrUILJyU9vejeLzPpvisraSad6CH36IonFQwAt3-YR7xurEqEed-UZDoG=w1920-h969)
 
 ![image](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
 ![image](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
